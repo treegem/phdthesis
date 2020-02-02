@@ -1,6 +1,7 @@
+import matplotlib.colors as clrs
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.colors as clrs
+
 import util.tum_jet as tum_jet
 
 
@@ -21,8 +22,6 @@ def main():
     for j, y in enumerate(ys):
         for i, x in enumerate(xs):
             dipole_field[i, j] = calc_dipole_field(x, y)
-    # print(dipole_field.max())
-    # print(dipole_field.min())
     dipole_field = np.clip(dipole_field, -1000, 1000)
     starting_points = []
     for i in np.linspace(-0.5, 0.5, 10):
