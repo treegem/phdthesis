@@ -19,7 +19,7 @@ def main():
     plt.yticks([0, 10, 20])
     cbar = plt.colorbar(aspect=10)
     cbar.ax.set_yticklabels(['20', '40', '60', '80'])
-    cbar.set_label('kcts/s')
+    cbar.set_label('luminescence (kcts/s)')
     plt.tight_layout()
     plt.savefig('confocal_scan.png', dpi=500)
 
