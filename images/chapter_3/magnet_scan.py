@@ -35,7 +35,7 @@ class MagnetScanPlotter:
     def add_colorbar(self, image):
         self.fig.subplots_adjust(bottom=0.2, top=0.92, left=0.08, right=0.85, wspace=0.2)
         cbar_ax = self.fig.add_axes([0.85, 0.2, 0.04, 0.72])
-        self.fig.colorbar(image, cax=cbar_ax, label='luminescence (kcts/s)')
+        self.fig.colorbar(image, cax=cbar_ax, label=r'luminescence (kcts/s)')
 
     def calc_offsets(self):
         x_offset = self.wide_scan_data[self.coordinates][0][0][0]

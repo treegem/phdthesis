@@ -5,6 +5,9 @@ from calcs.optical_polarization import calc_polarization, percentage_of_polarize
 from util.inches import cm_to_inch
 from util.tum_jet import tum_color
 
+plt.rcParams['text.latex.preamble'] = [
+    r"\usepackage{amsmath} \usepackage{amsfonts} \usepackage{amssymb} \usepackage{braket}"]
+
 
 def main():
     ks = np.arange(0, 11, 1)
@@ -14,15 +17,15 @@ def main():
 
     polarizations = calc_polarization(ks)
     ax1.plot(ks, polarizations, '.', color=tum_color(0))
-    ax1.set_xlabel(u'$n$')
+    ax1.set_xlabel(r'$n$')
     ax1.set_xticks(ks[::2])
-    ax1.set_ylabel(u'$ P_n $')
+    ax1.set_ylabel(r'$ P_n $')
     ax1.set_yticks(np.arange(0, 1.1, 0.25))
 
     ax2.plot(ks, percentage_of_polarized_states(polarizations), '.', color=tum_color(0))
-    ax2.set_xlabel(u'$n$')
+    ax2.set_xlabel(r'$n$')
     ax2.set_xticks(ks[::2])
-    ax2.set_ylabel(u'$ \dfrac{N_0}{N_0 + N_{\pm 1}} $')
+    ax2.set_ylabel(r'$ \dfrac{N_0}{N_0 + N_{\pm 1}} $')
     ax2.set_yticks(np.arange(0.5, 1.01, 0.1))
 
     plt.tight_layout()
