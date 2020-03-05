@@ -13,9 +13,9 @@ def main():
 
 def plot_and_save_odmr_spectrum(cts, freqs):
     plt.figure(figsize=(inches.cm_to_inch(15), inches.cm_to_inch(5.5)))
-    plt.plot(freqs * 1e-9, smoothing.smooth_array_by_rolling_average(cts, 2), '.')
+    plt.plot(freqs * 1e-9, smoothing.smooth_array_by_rolling_average(cts, 2) * 1e-3, '.')
     plt.xlabel('mw frequency (GHz)')
-    plt.ylabel('luminescence (cts/s)')
+    plt.ylabel('luminescence (kcts/s)')
     plt.tight_layout()
     plt.savefig('cw_odmr_spectrum.png', dpi=500)
 
