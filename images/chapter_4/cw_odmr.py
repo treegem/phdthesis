@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io as sio
 
-from util import inches, smoothing
+from util import inches, graph_transformation
 
 
 def main():
@@ -13,7 +13,7 @@ def main():
 
 def plot_and_save_odmr_spectrum(cts, freqs):
     plt.figure(figsize=(inches.cm_to_inch(15), inches.cm_to_inch(5.5)))
-    plt.plot(freqs * 1e-9, smoothing.smooth_array_by_rolling_average(cts, 2) * 1e-3, '.')
+    plt.plot(freqs * 1e-9, graph_transformation.smooth_array_by_rolling_average(cts, 2) * 1e-3, '.')
     plt.xlabel('mw frequency (GHz)')
     plt.ylabel('luminescence (kcts/s)')
     plt.tight_layout()

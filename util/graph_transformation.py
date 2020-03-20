@@ -14,6 +14,12 @@ def smooth_array_by_rolling_average(array: np.ndarray, neighbors: int = 1):
     return smoothed_array
 
 
+def normalize(array: np.ndarray):
+    array -= array.min()
+    max_ = array / array.max()
+    return max_
+
+
 def __smooth_single_value_by_rolling_average(array: np.ndarray, i: int, neighbors: int = 1):
     summed_values = np.sum(array[i - neighbors:i + neighbors + 1])
     return summed_values / (2 * neighbors + 1)

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io as sio
 
-from util import smoothing
+from util import graph_transformation
 from util.inches import cm_to_inch
 
 
@@ -26,7 +26,7 @@ def plot_and_save_odmr_spectrum(cts_broad, cts_narrow, freqs_broad, freqs_narrow
 
 
 def plot_one_axis(axis, cts, freqs):
-    axis.plot(freqs * 1e-9, smoothing.smooth_array_by_rolling_average(cts, 2) * 1e-6, '.')
+    axis.plot(freqs * 1e-9, graph_transformation.smooth_array_by_rolling_average(cts, 2) * 1e-6, '.')
     axis.set_xlabel('mw frequency (GHz)')
     axis.set_ylabel('luminescence (Mcts/s)')
 
