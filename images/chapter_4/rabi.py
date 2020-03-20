@@ -27,7 +27,7 @@ class RabiPlotter:
         plt.ylabel("luminescence (norm.)")
         plt.legend(loc='upper right')
         plt.tight_layout()
-        plt.savefig('rabi.png')
+        plt.savefig('rabi.png', dpi=500)
 
     def load_file(self, filename: str):
         full_path = os.path.join(self.path, filename)
