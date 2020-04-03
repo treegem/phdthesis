@@ -9,10 +9,6 @@ from util.inches import cm_to_inch
 from util.tum_jet import tum_color
 
 
-def beautify(array):
-    return 0.25 * normalize(smoothen(array)) + 0.7125
-
-
 class RabiPlotter:
     def __init__(self):
         self.path = "//file/e24/Projects/ReinhardLab/data_setup_nv1/180704_hf_setup_deer_tests"
@@ -43,6 +39,10 @@ class RabiData:
 
     def __str__(self):
         return 'power: {0}, x_data: {1}, y_data: {2}'.format(self.power, len(self.x_data), len(self.y_data))
+
+
+def beautify(array):
+    return 0.25 * normalize(smoothen(array)) + 0.7125
 
 
 if __name__ == '__main__':
