@@ -1,0 +1,22 @@
+= DOCUMENTATION
+
+== Chapter 5 (Widefield)
+
+=== Relevant data
+
+- 160927_01A_proem_screening (Gaussian beam + Zeichnung)
+- 160928_01A_proem_screening (Good Guassian beam image)
+- 161102_proem_rabis (First Rabis without TopHat and without Background correction)
+- 161109_background_rabis (Bad Rabis with Background correction)
+- 161110_rabis_echos (Good Rabis with? bg correction)
+- 161114_rabis_bigger_area (Rabis)
+- 161114_rabis_with_mask (Rabis)
+- 161116_rabis_echos(Rabis with correction)
+- 161117_echos(Rabis with mask and some echoes)
+- 161121_echos(Watershed mask)
+- 161122_watershed_proem(Cross correlation movie)
+- 161124_proem_odmr(ws image + roi movie)
+- 161128_odmr_rabi_echo (zeichnung enthält ws - echo)
+- 170208_tophat (first tophat data)
+- 170220_pro_echo (4f vs simple)
+- 170222_pro_contrast
