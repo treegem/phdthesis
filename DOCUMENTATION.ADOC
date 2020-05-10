@@ -20,3 +20,4 @@
 - 170208_tophat (first tophat data)
 - 170220_pro_echo (4f vs simple)
 - 170222_pro_contrast
+- Email an Rädle enthält guten Vergleich.
