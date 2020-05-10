@@ -21,8 +21,8 @@ class BeamComparison:
 
     def plot(self):
         self.__create_and_scale_figure_and_axes()
-        square_image = self.__imshow_both_axes()  # image necessary to determine colorbar range
-        self.__add_colorbar(square_image)
+        self.__imshow_both_axes()
+        self.__add_colorbar()
         plt.savefig('beam_comparison.png', dpi=500)
 
     def __create_and_scale_figure_and_axes(self):
@@ -35,7 +35,6 @@ class BeamComparison:
         square_image = self.__imshow_single_axis(1, self.square_data)
         self.__set_labels()
         self.__set_y_ticks_and_labels()
-        return square_image
 
     def __set_y_ticks_and_labels(self):
         self.axes[0].set_yticks([0, 5, 10, 15])
@@ -67,11 +66,11 @@ class BeamComparison:
         self.axes[0].set_ylabel(r'$y$ ($\mu$m)')
         self.axes[1].set_xlabel(r'$x$ ($\mu$m)')
 
-    def __add_colorbar(self, square_image):
+    def __add_colorbar(self):
         bottom, top, right = 0.15, 0.9, 0.83
         self.fig.subplots_adjust(bottom=bottom, top=0.9, left=0.05, right=right, wspace=-0.1)
         cbar_ax = self.fig.add_axes([right + 0.01, bottom, 0.05, top - bottom])
-        self.fig.colorbar(square_image, cax=cbar_ax, label=r'luminescence (cts/s)')
+        self.fig.colorbar(self.axes[0].images[0], cax=cbar_ax, label=r'luminescence (cts/s)')
 
 
 if __name__ == '__main__':
