@@ -32,7 +32,7 @@ class BeamComparison:
 
     def __imshow_both_axes(self):
         self.__imshow_single_axis(0, self.gaussian_data)
-        square_image = self.__imshow_single_axis(1, self.square_data)
+        self.__imshow_single_axis(1, self.square_data)
         self.__set_labels()
         self.__set_y_ticks_and_labels()
 
