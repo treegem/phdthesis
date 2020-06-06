@@ -24,9 +24,9 @@ class MagnetScanPlotter:
 
     def plot_magnet_scan(self):
         image = self.plot_one_axis(axis=self.ax1, data=self.wide_scan_data)
-        self.ax1.set_yticks([0, 10, 20])
+        self.ax1.__set_ticks([0, 10, 20])
         self.plot_one_axis(axis=self.ax2, data=self.zoom_scan_data, y_offset=self.y_offset - 0.023)
-        self.ax2.set_yticks([12, 12.5, 13])
+        self.ax2.__set_ticks([12, 12.5, 13])
 
         self.add_colorbar(image)
 

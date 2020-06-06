@@ -44,7 +44,7 @@ def plot_the_shit(axis, color, downwards, upwards, xs, legend='test'):
     axis.set_ylim([-1, 1])
     axis.set_xlabel(u'$B_0$ (arb. u.)')
     axis.legend(loc='lower left', handlelength=0, handletextpad=0, fancybox=True)
-    axis.set_yticks([-1, 0, 1])
+    axis.__set_ticks([-1, 0, 1])
 
 
 if __name__ == '__main__':
