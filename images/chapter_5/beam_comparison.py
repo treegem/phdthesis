@@ -1,10 +1,13 @@
 import os
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
 from util.inches import cm_to_inch
 from util.tum_jet import tum_jet
+
+matplotlib.rcParams['text.latex.preamble'] = [r'\usepackage{siunitx}']
 
 
 class BeamComparison:
@@ -62,9 +65,9 @@ class BeamComparison:
         return pixels * um_per_pixels
 
     def __set_labels(self):
-        self.axes[0].set_xlabel(r'$x$ ($\mu$m)')
-        self.axes[0].set_ylabel(r'$y$ ($\mu$m)')
-        self.axes[1].set_xlabel(r'$x$ ($\mu$m)')
+        self.axes[0].set_xlabel(r'$x$ ($\si{\micro \meter}$)')
+        self.axes[0].set_ylabel(r'$y$ ($\si{\micro \meter}$)')
+        self.axes[1].set_xlabel(r'$x$ ($\si{\micro \meter}$)')
 
     def __add_colorbar(self):
         bottom, top, right = 0.15, 0.9, 0.83

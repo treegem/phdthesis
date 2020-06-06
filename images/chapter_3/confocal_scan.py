@@ -1,10 +1,13 @@
 import os
 
+import matplotlib
 import matplotlib.pyplot as plt
 from scipy.io import loadmat
 
 from util.inches import cm_to_inch
 from util.tum_jet import tum_jet
+
+matplotlib.rcParams['text.latex.preamble'] = [r'\usepackage{siunitx}']
 
 
 def main():
@@ -14,8 +17,8 @@ def main():
     plt.figure(figsize=(cm_to_inch(7.5), cm_to_inch(5)))
     plt.imshow(file_data['result'], vmax=8e4, cmap=tum_jet, interpolation='bilinear', origin='lower',
                extent=[0, x_extent(file_data), 0, y_extent(file_data)])
-    plt.xlabel(r'$x$ (nm)')
-    plt.ylabel(r'$y$ (nm)')
+    plt.xlabel(r'$x$ ($\si{\micro \meter}$)')
+    plt.ylabel(r'$y$ ($\si{\micro \meter}$)')
     plt.yticks([0, 10, 20])
     cbar = plt.colorbar(aspect=10)
     cbar.ax.set_yticklabels(['20', '40', '60', '80'])
