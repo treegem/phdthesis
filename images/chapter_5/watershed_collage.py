@@ -26,6 +26,11 @@ class WatershedPlotter:
         plt.tight_layout()
         plt.savefig('watershed_collage.png', dpi=500)
 
+    def __create_and_scale_figure_and_axes(self):
+        self.fig, self.axes = plt.subplots(nrows=1, ncols=3)
+        self.fig.set_figheight(cm_to_inch(6.5))
+        self.fig.set_figwidth(cm_to_inch(15))
+
     def __set_labels(self):
         self.axes[0].set_ylabel(r'$y$ ($\si{\micro \meter}$)')
         for axis in self.axes:
@@ -53,11 +58,6 @@ class WatershedPlotter:
     def __imshow_single_axis(self, axis, data, color_map=tum_jet):
         self.axes[axis].imshow(data, cmap=color_map, origin='lower', aspect=1,
                                interpolation='bilinear', extent=self.__convert_extent_from_pixels_to_um())
-
-    def __create_and_scale_figure_and_axes(self):
-        self.fig, self.axes = plt.subplots(nrows=1, ncols=3)
-        self.fig.set_figheight(cm_to_inch(7))
-        self.fig.set_figwidth(cm_to_inch(15))
 
     def __convert_extent_from_pixels_to_um(self):
         return [0, self.__convert_pixels_to_um(200), 0, self.__convert_pixels_to_um(250)]
