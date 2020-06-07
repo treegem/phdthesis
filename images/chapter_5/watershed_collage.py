@@ -2,6 +2,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+from util.camera_plotting import cam_imshow, convert_extent_from_pixels_to_um
 from util.inches import cm_to_inch
 from util.tum_jet import tum_jet
 
@@ -50,22 +51,13 @@ class WatershedPlotter:
         self.__imshow_single_axis(1, self.smoothed_data, color_map='gray')
         self.axes[1].contour(np.flipud(self.watershed_data), levels=np.arange(self.watershed_data.max()),
                              linewidths=.4, origin='upper', cmap=tum_jet,
-                             extent=self.__convert_extent_from_pixels_to_um())
+                             extent=convert_extent_from_pixels_to_um())
 
     def __plot_original(self):
         self.__imshow_single_axis(0, self.original_data)
 
     def __imshow_single_axis(self, axis, data, color_map=tum_jet):
-        self.axes[axis].imshow(data, cmap=color_map, origin='lower', aspect=1,
-                               interpolation='bilinear', extent=self.__convert_extent_from_pixels_to_um())
-
-    def __convert_extent_from_pixels_to_um(self):
-        return [0, self.__convert_pixels_to_um(200), 0, self.__convert_pixels_to_um(250)]
-
-    @staticmethod
-    def __convert_pixels_to_um(pixels):
-        um_per_pixels = 10 / 150
-        return pixels * um_per_pixels
+        cam_imshow(self.axes[axis], data, color_map)
 
 
 if __name__ == '__main__':

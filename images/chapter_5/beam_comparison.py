@@ -4,8 +4,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+from util.camera_plotting import cam_imshow
 from util.inches import cm_to_inch
-from util.tum_jet import tum_jet
 
 matplotlib.rcParams['text.latex.preamble'] = [r'\usepackage{siunitx}']
 
@@ -46,8 +46,7 @@ class BeamComparison:
 
     def __imshow_single_axis(self, axis_index, data):
         vmin, vmax = self.__define_min_max_for_plot()
-        return self.axes[axis_index].imshow(data, vmin=vmin, vmax=vmax, cmap=tum_jet, origin='lower', aspect=1,
-                                            interpolation='bilinear', extent=self.__convert_extent_from_pixels_to_um())
+        cam_imshow(self.axes[axis_index], data, vmin=vmin, vmax=vmax)
 
     def __define_min_max_for_plot(self):
         gaussian_min = self.gaussian_data.min()
@@ -55,14 +54,6 @@ class BeamComparison:
         square_min = self.gaussian_data.min()
         square_max = self.gaussian_data.max()
         return min(gaussian_min, square_min), max(gaussian_max, square_max)
-
-    def __convert_extent_from_pixels_to_um(self):
-        return [0, self.__convert_pixels_to_um(200), 0, self.__convert_pixels_to_um(250)]
-
-    @staticmethod
-    def __convert_pixels_to_um(pixels):
-        um_per_pixels = 10 / 150
-        return pixels * um_per_pixels
 
     def __set_labels(self):
         self.axes[0].set_xlabel(r'$x$ ($\si{\micro \meter}$)')
