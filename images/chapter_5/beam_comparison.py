@@ -46,7 +46,7 @@ class BeamComparison:
 
     def __imshow_single_axis(self, axis_index, data):
         vmin, vmax = self.__define_min_max_for_plot()
-        cam_imshow(self.axes[axis_index], data, vmin=vmin, vmax=vmax)
+        cam_imshow(data, self.axes[axis_index], vmin=vmin, vmax=vmax)
 
     def __define_min_max_for_plot(self):
         gaussian_min = self.gaussian_data.min()

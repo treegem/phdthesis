@@ -57,7 +57,7 @@ class WatershedPlotter:
         self.__imshow_single_axis(0, self.original_data)
 
     def __imshow_single_axis(self, axis, data, color_map=tum_jet):
-        cam_imshow(self.axes[axis], data, color_map)
+        cam_imshow(data, self.axes[axis], color_map)
 
 
 if __name__ == '__main__':
