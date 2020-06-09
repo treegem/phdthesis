@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.ndimage
 
-from util.camera_plotting import cam_imshow
+from util.camera_plotting import cam_imshow, convert_pixels_to_um
 from util.inches import cm_to_inch
-from util.tum_jet import tum_jet
+from util.tum_jet import tum_jet, tum_color
 
 
 class ZFocusPlotter:
@@ -20,6 +20,43 @@ class ZFocusPlotter:
         self.__create_figures_and_axes()
 
     def plot(self):
+        self.__plot_original_images()
+
+        self.__plot_fft_images()
+
+        all_sharpnesses = self.__sharpness_of_all_images()
+        sharpness_axis = self.axes[4]
+        sharpness_axis.plot(self.zs, all_sharpnesses / all_sharpnesses.max(), '.', color=tum_color(0))
+        sharpness_axis.set_xlabel(r'focus depth ($\si{\micro \meter}$)')
+        sharpness_axis.set_ylabel('sharpness (normalized)')
+
+        plt.tight_layout()
+        plt.savefig('z_focus_collage.png', dpi=500)
+
+    def __plot_fft_images(self):
+        fft_extent = self.calculate_fft_extent()
+
+        fft_unsharp = np.abs(np.fft.fft2(self.unsharp_image))
+        image2 = self.axes[2].imshow(fft_unsharp / 2e5, cmap=tum_jet, origin='lower', vmax=1, extent=fft_extent)
+        self.fig.colorbar(image2, ax=self.axes[2], label='fourier component (arb. u.)')
+
+        fft_sharp = np.abs(np.fft.fft2(self.sharp_image))
+        image3 = self.axes[3].imshow(fft_sharp / 2e5, cmap=tum_jet, origin='lower', vmax=1, extent=fft_extent)
+        self.fig.colorbar(image3, ax=self.axes[3], label='fourier component (arb. u.)')
+
+        for axis in [self.axes[2], self.axes[3]]:
+            axis.set_xlabel(r'$\omega_x$ ($\si{2 \pi \per \micro \meter}$)')
+            axis.set_ylabel(r'$\omega_y$ ($\si{2 \pi \per \micro \meter}$)')
+
+    def calculate_fft_extent(self):
+        fft_freq_x = np.fft.fftfreq(self.unsharp_image.shape[1],
+                                    convert_pixels_to_um(200) / self.unsharp_image.shape[1])
+        fft_freq_y = np.fft.fftfreq(self.unsharp_image.shape[0],
+                                    convert_pixels_to_um(250) / self.unsharp_image.shape[0])
+        fft_extent = [fft_freq_x.min(), fft_freq_x.max(), fft_freq_y.min(), fft_freq_y.max()]
+        return fft_extent
+
+    def __plot_original_images(self):
         image0 = cam_imshow(self.unsharp_image, self.axes[0])
         self.fig.colorbar(image0, ax=self.axes[0], label='counts')
         image1 = cam_imshow(self.sharp_image, self.axes[1])
@@ -27,18 +64,6 @@ class ZFocusPlotter:
         for axis in [self.axes[0], self.axes[1]]:
             axis.set_xlabel(r'$x$ ($\si{\micro \meter}$)')
             axis.set_ylabel(r'$y$ ($\si{\micro \meter}$)')
-
-        fft_unsharp = np.abs(np.fft.fft2(self.unsharp_image))
-        image2 = self.axes[2].imshow(fft_unsharp, cmap=tum_jet, origin='lower', vmax=2e5)
-        self.fig.colorbar(image2, ax=self.axes[2], label='counts')
-        fft_sharp = np.abs(np.fft.fft2(self.sharp_image))
-        image3 = self.axes[3].imshow(fft_sharp, cmap=tum_jet, origin='lower', vmax=2e5)
-        self.fig.colorbar(image3, ax=self.axes[3], label='counts')
-
-        self.axes[4].plot(self.zs, self.__sharpness_of_all_images(), '.')
-
-        plt.tight_layout()
-        plt.savefig('z_focus_collage.png', dpi=500)
 
     def __create_figures_and_axes(self):
         self.fig = plt.figure(figsize=(cm_to_inch(15), cm_to_inch(16.5)))
