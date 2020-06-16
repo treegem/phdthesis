@@ -1,3 +1,4 @@
+PIL
 scipy
 cycler==0.10.0
 kiwisolver==1.1.0

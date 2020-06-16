@@ -24,14 +24,17 @@ class ZFocusPlotter:
 
         self.__plot_fft_images()
 
+        self.__plot_sharpness()
+
+        plt.tight_layout()
+        plt.savefig('z_focus_collage.png', dpi=500)
+
+    def __plot_sharpness(self):
         all_sharpnesses = self.__sharpness_of_all_images()
         sharpness_axis = self.axes[4]
         sharpness_axis.plot(self.zs, all_sharpnesses / all_sharpnesses.max(), '.', color=tum_color(0))
         sharpness_axis.set_xlabel(r'focus depth ($\si{\micro \meter}$)')
         sharpness_axis.set_ylabel('sharpness (normalized)')
-
-        plt.tight_layout()
-        plt.savefig('z_focus_collage.png', dpi=500)
 
     def __plot_fft_images(self):
         fft_extent = self.calculate_fft_extent()

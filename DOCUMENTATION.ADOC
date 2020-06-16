@@ -21,3 +21,8 @@
 - 170220_pro_echo (4f vs simple)
 - 170222_pro_contrast
 - Email an Rädle enthält guten Vergleich.
+
+=== Movies
+
+- 170220_pro_echo (odmr)
+- 170215_pro_echo\echo_001 (long time exposure)
