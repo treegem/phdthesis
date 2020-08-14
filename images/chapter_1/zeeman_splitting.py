@@ -25,7 +25,7 @@ def main():
     color = tum_color(5)
     axis = ax2
     plot_the_shit(axis, color, downwards, upwards, xs, legend=u'$^{14}$N')
-    axis.plot([0, 1], [0, 0], color=color)
+    axis.plot_for_thesis([0, 1], [0, 0], color=color)
 
     gamma = -0.4
     upwards = xs * gamma
@@ -39,8 +39,8 @@ def main():
 
 
 def plot_the_shit(axis, color, downwards, upwards, xs, legend='test'):
-    axis.plot(xs, upwards, color=color, label=legend)
-    axis.plot(xs, downwards, color=color)
+    axis.plot_for_thesis(xs, upwards, color=color, label=legend)
+    axis.plot_for_thesis(xs, downwards, color=color)
     axis.set_ylim([-1, 1])
     axis.set_xlabel(u'$B_0$ (arb. u.)')
     axis.legend(loc='lower left', handlelength=0, handletextpad=0, fancybox=True)

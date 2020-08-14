@@ -32,7 +32,7 @@ class ZFocusPlotter:
     def __plot_sharpness(self):
         all_sharpnesses = self.__sharpness_of_all_images()
         sharpness_axis = self.axes[4]
-        sharpness_axis.plot(self.zs, all_sharpnesses / all_sharpnesses.max(), '.', color=tum_color(0))
+        sharpness_axis.plot_for_thesis(self.zs, all_sharpnesses / all_sharpnesses.max(), '.', color=tum_color(0))
         sharpness_axis.set_xlabel(r'focus depth ($\si{\micro \meter}$)')
         sharpness_axis.set_ylabel('sharpness (normalized)')
 

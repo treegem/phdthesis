@@ -16,13 +16,13 @@ def main():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(cm_to_inch(15), cm_to_inch(6)))
 
     polarizations = calc_polarization(ks)
-    ax1.plot(ks, polarizations, '.', color=tum_color(0))
+    ax1.plot_for_thesis(ks, polarizations, '.', color=tum_color(0))
     ax1.set_xlabel(r'$n$')
     ax1.set_xticks(ks[::2])
     ax1.set_ylabel(r'$ P_n $')
     ax1.__set_ticks(np.arange(0, 1.1, 0.25))
 
-    ax2.plot(ks, percentage_of_polarized_states(polarizations), '.', color=tum_color(0))
+    ax2.plot_for_thesis(ks, percentage_of_polarized_states(polarizations), '.', color=tum_color(0))
     ax2.set_xlabel(r'$n$')
     ax2.set_xticks(ks[::2])
     ax2.set_ylabel(r'$ \dfrac{N_0}{N_0 + N_{\pm 1}} $')

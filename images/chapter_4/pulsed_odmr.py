@@ -26,7 +26,7 @@ def plot_and_save_odmr_spectrum(cts_broad, cts_narrow, freqs_broad, freqs_narrow
 
 
 def plot_one_axis(axis, cts, freqs):
-    axis.plot(freqs * 1e-9, graph_transformation.smooth_array_by_rolling_average(cts, 2) * 1e-6, '.')
+    axis.plot_for_thesis(freqs * 1e-9, graph_transformation.smooth_array_by_rolling_average(cts, 2) * 1e-6, '.')
     axis.set_xlabel('mw frequency (GHz)')
     axis.set_ylabel('luminescence (Mcts/s)')
 
