@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+from util import tum_jet
 from util.inches import cm_to_inch
 
 
@@ -22,8 +23,8 @@ class ProemTauVsCountsPlotter:
         self.axes[1].set_ylabel('counts (normalized)')
 
     def __plot_counts(self):
-        self.axes[0].plot(self.taus, self.__decaying_counts_with_tau())
-        self.axes[1].plot(self.taus, self.__constant_counts_with_tau())
+        self.axes[0].plot(self.taus, self.__decaying_counts_with_tau(), color=tum_jet.tum_color(0))
+        self.axes[1].plot(self.taus, self.__constant_counts_with_tau(), color=tum_jet.tum_color(0))
         self.axes[1].set_ylim(self.axes[0].get_ylim())
 
     def __decaying_counts_with_tau(self):
