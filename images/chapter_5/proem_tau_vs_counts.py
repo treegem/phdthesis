@@ -11,8 +11,15 @@ class ProemTauVsCountsPlotter:
 
     def plot(self):
         self.__plot_counts()
+        self.__set_labels()
         plt.tight_layout()
-        plt.show()
+        plt.savefig('proem_tau_vs_counts.png', dpi=500)
+
+    def __set_labels(self):
+        self.axes[0].set_xlabel(r'$\tau$ (normalized)')
+        self.axes[1].set_xlabel(r'$\tau$ (normalized)')
+        self.axes[0].set_ylabel('counts (normalized)')
+        self.axes[1].set_ylabel('counts (normalized)')
 
     def __plot_counts(self):
         self.axes[0].plot(self.taus, self.__decaying_counts_with_tau())

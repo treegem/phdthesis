@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+import scipy.io as sio
+
+
+def main():
+    data = sio.loadmat('odmr_measurement_002.mat')
+    for key in data.keys():
+        try:
+            print(key, data[key].shape)
+        except AttributeError:
+            pass
+    plt.plot(data['sums'][0][1:])
+    plt.show()
+
+
+if __name__ == '__main__':
+    main()
