@@ -35,7 +35,7 @@ class RoiVsReferencePlotter:
 
     def __load_corrected_data(self):
         data = np.loadtxt(os.path.join(self.folder_corrected, 'result.txt'))
-        return data - 4e10  # to increase contrast to level of NV 577
+        return data - 3.8e10  # to increase contrast to level of NV 577
 
     def __load_uncorrected_data(self):
         filenames = os.listdir(self.folder_uncorrected)
