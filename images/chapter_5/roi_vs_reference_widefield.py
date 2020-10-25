@@ -16,16 +16,16 @@ class RoiVsReferencePlotter:
         self.uncorrected_data = self.__load_uncorrected_data()
 
     def create_and_save_plot(self):
-        self.__create_corrected_plot()
         self.__create_uncorrected_plot()
+        self.__create_corrected_plot()
         plt.tight_layout()
         plt.savefig('corrected_vs_uncorrected.jpg', dpi=500)
 
-    def __create_corrected_plot(self):
-        self.__create_plot(self.__calc_corrected_taus(), 0, self.corrected_data)
-
     def __create_uncorrected_plot(self):
-        self.__create_plot(self.__calc_uncorrected_taus(), 1, self.uncorrected_data)
+        self.__create_plot(self.__calc_uncorrected_taus(), 0, self.uncorrected_data)
+
+    def __create_corrected_plot(self):
+        self.__create_plot(self.__calc_corrected_taus(), 1, self.corrected_data)
 
     def __create_plot(self, taus, axis_index, data):
         axis = self.axes[axis_index]
