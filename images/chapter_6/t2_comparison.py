@@ -27,7 +27,7 @@ class ComparisonPlotter:
 
         xs = self.__create_random_xs(all_t2s_without_n)
 
-        fig = pylab.figure(figsize=(cm_to_inch(15), cm_to_inch(6)))
+        fig = pylab.figure(figsize=(cm_to_inch(15), cm_to_inch(7)))
         pylab.subplot(211)
         for i, t2s in enumerate(all_t2s_without_n):
             if i == 0:
