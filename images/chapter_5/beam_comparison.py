@@ -25,6 +25,7 @@ class BeamComparison:
         self.__imshow_both_confocal_scans()
         self.__add_colorbar()
         self.__plot_both_projections()
+        self.__add_figure_enumeration()
         plt.savefig('beam_comparison.png', dpi=500)
 
     @staticmethod
@@ -51,7 +52,7 @@ class BeamComparison:
 
     def __imshow_confocal_scan_single_axis(self, axis_index, data):
         vmin, vmax = self.__define_min_max_of_raw_data()
-        cam_imshow(data, self.axes[0][axis_index], vmin=vmin, vmax=vmax)
+        cam_imshow(data, self.axes[0][axis_index], vmin=vmin, vmax=vmax - 1500)
 
     def __define_min_max_of_raw_data(self):
         gaussian_min = self.gaussian_data.min()
@@ -113,6 +114,12 @@ class BeamComparison:
         print('sigma: ', fit_params[1])
         print('d_sigma: ', err_sigma)
         axis.plot(xs, self.__gaussian(xs, *fit_params), '--', color=tum_color(5))
+
+    def __add_figure_enumeration(self):
+        plt.figtext(0.05, 0.92, 'a)', figure=self.fig)
+        plt.figtext(0.45, 0.92, 'b)', figure=self.fig)
+        plt.figtext(0.05, 0.48, 'c)', figure=self.fig)
+        plt.figtext(0.45, 0.48, 'd)', figure=self.fig)
 
 
 if __name__ == '__main__':
