@@ -106,7 +106,7 @@ class BeamComparison:
 
     @staticmethod
     def __gaussian(x, mu, sig, c, a):
-        return a * np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.))) + c
+        return a * 1 / (sig * np.sqrt(2 * np.pi)) * np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.))) + c
 
     def __plot_projection_fit(self, xs, projected_data, axis):
         fit_params, err = curve_fit(self.__gaussian, xs, projected_data, p0=[7., 1., 120., 80.])
