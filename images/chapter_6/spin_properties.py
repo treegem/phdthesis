@@ -177,10 +177,11 @@ class SpinPropertiesPlotter:
         plt.gca().yaxis.set_label_position("right")
         plt.gca().yaxis.tick_right()
 
-        plt.figtext(0.02, 0.9, 'a)', fontsize=8)
-        plt.figtext(0.55, 0.9, 'b)', fontsize=8)
-        plt.figtext(0.02, 0.455, 'c)', fontsize=8)
-        plt.figtext(0.55, 0.455, 'd)', fontsize=8)
+        label_font_size = 11
+        plt.figtext(0.02, 0.9, 'a)', fontsize=label_font_size)
+        plt.figtext(0.50, 0.9, 'b)', fontsize=label_font_size)
+        plt.figtext(0.02, 0.455, 'c)', fontsize=label_font_size)
+        plt.figtext(0.50, 0.455, 'd)', fontsize=label_font_size)
 
         # plt.tight_layout(pad=0.1, w_pad=2, h_pad=2)
         spin_property_fig.savefig('spin_properties/spin_properties.png', dpi=600, pad_inches=0.1, bbox_inches='tight')
