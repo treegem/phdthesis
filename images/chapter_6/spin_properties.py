@@ -80,7 +80,9 @@ class SpinPropertiesPlotter:
                   (156 / 255, 157 / 255, 159 / 255),  # TUM Yellow
                   ]
 
-        sns.stripplot(x='Probe', y='T2', data=df, palette=colors, jitter=0.2, dodge=False, size=1.5, alpha=1,
+        scatter_point_size = 2.5
+        sns.stripplot(x='Probe', y='T2', data=df, palette=colors, jitter=0.2, dodge=False, size=scatter_point_size,
+                      alpha=1,
                       linewidth=0,
                       ax=boxAx)
 
@@ -100,11 +102,14 @@ class SpinPropertiesPlotter:
         T2SortD45 = csvDatD45_2[csvDatD45_2[:, 12].argsort()]
         T2SortD01B = csvDatD01B_1[csvDatD01B_1[:, 12].argsort()]
         T2SortD02C = csvDatD02C[csvDatD02C[:, 12].argsort()]
-        scat_s = 1
-        T2Ax.scatter(np.linspace(0, 100, T2SortD45.shape[0]), T2SortD45[:, 12], s=scat_s, color=colors[0], label=DNi)
-        T2Ax.scatter(np.linspace(0, 100, T2SortD44.shape[0]), T2SortD44[:, 12], s=scat_s, color=colors[1], label=DPd)
-        T2Ax.scatter(np.linspace(0, 100, T2SortD01B.shape[0]), T2SortD01B[:, 12], s=scat_s, color=colors[2], label=DUV)
-        T2Ax.scatter(np.linspace(0, 100, T2SortD02C.shape[0]), T2SortD02C[:, 12], s=scat_s, color=colors[3],
+
+        T2Ax.scatter(np.linspace(0, 100, T2SortD45.shape[0]), T2SortD45[:, 12], s=scatter_point_size, color=colors[0],
+                     label=DNi)
+        T2Ax.scatter(np.linspace(0, 100, T2SortD44.shape[0]), T2SortD44[:, 12], s=scatter_point_size, color=colors[1],
+                     label=DPd)
+        T2Ax.scatter(np.linspace(0, 100, T2SortD01B.shape[0]), T2SortD01B[:, 12], s=scatter_point_size, color=colors[2],
+                     label=DUV)
+        T2Ax.scatter(np.linspace(0, 100, T2SortD02C.shape[0]), T2SortD02C[:, 12], s=scatter_point_size, color=colors[3],
                      label=DAlOx)
 
         lw = 0.5
@@ -130,10 +135,10 @@ class SpinPropertiesPlotter:
         SortODMRH_01b = ODMRH_01b[ODMRH_01b.argsort()] * 1E2
         SortODMRH_02c = ODMRH_02c[ODMRH_02c.argsort()] * 1E2
 
-        plt.scatter(np.linspace(0, 100, ODMRH_45.shape[0]), SortODMRH_45, s=scat_s, color=colors[0])
-        plt.scatter(np.linspace(0, 100, ODMRH_44.shape[0]), SortODMRH_44, s=scat_s, color=colors[1])
-        plt.scatter(np.linspace(0, 100, ODMRH_01b.shape[0]), SortODMRH_01b, s=scat_s, color=colors[2])
-        plt.scatter(np.linspace(0, 100, ODMRH_02c.shape[0]), SortODMRH_02c, s=scat_s, color=colors[3])
+        plt.scatter(np.linspace(0, 100, ODMRH_45.shape[0]), SortODMRH_45, s=scatter_point_size, color=colors[0])
+        plt.scatter(np.linspace(0, 100, ODMRH_44.shape[0]), SortODMRH_44, s=scatter_point_size, color=colors[1])
+        plt.scatter(np.linspace(0, 100, ODMRH_01b.shape[0]), SortODMRH_01b, s=scatter_point_size, color=colors[2])
+        plt.scatter(np.linspace(0, 100, ODMRH_02c.shape[0]), SortODMRH_02c, s=scatter_point_size, color=colors[3])
 
         plt.axvline(50, color='xkcd:gray', ls='--', linewidth=lw)
         plt.axvline(75, color='xkcd:gray', ls=':', linewidth=lw)
@@ -151,10 +156,14 @@ class SpinPropertiesPlotter:
         SortODMRWid_01b = ODMRWid_01b[ODMRWid_01b.argsort()] * 1E3
         SortODMRWid_02c = ODMRWid_02c[ODMRWid_02c.argsort()] * 1E3
 
-        plt.scatter(np.linspace(0, 100, ODMRWid_45.shape[0]), SortODMRWid_45, s=scat_s, color=colors[0], label=DNi)
-        plt.scatter(np.linspace(0, 100, ODMRWid_44.shape[0]), SortODMRWid_44, s=scat_s, color=colors[1], label=DPd)
-        plt.scatter(np.linspace(0, 100, ODMRWid_01b.shape[0]), SortODMRWid_01b, s=scat_s, color=colors[2], label=DUV)
-        plt.scatter(np.linspace(0, 100, ODMRWid_02c.shape[0]), SortODMRWid_02c, s=scat_s, color=colors[3], label=DAlOx)
+        plt.scatter(np.linspace(0, 100, ODMRWid_45.shape[0]), SortODMRWid_45, s=scatter_point_size, color=colors[0],
+                    label=DNi)
+        plt.scatter(np.linspace(0, 100, ODMRWid_44.shape[0]), SortODMRWid_44, s=scatter_point_size, color=colors[1],
+                    label=DPd)
+        plt.scatter(np.linspace(0, 100, ODMRWid_01b.shape[0]), SortODMRWid_01b, s=scatter_point_size, color=colors[2],
+                    label=DUV)
+        plt.scatter(np.linspace(0, 100, ODMRWid_02c.shape[0]), SortODMRWid_02c, s=scatter_point_size, color=colors[3],
+                    label=DAlOx)
 
         plt.legend(markerscale=2)
 
@@ -173,7 +182,7 @@ class SpinPropertiesPlotter:
         plt.figtext(0.02, 0.455, 'c)', fontsize=8)
         plt.figtext(0.55, 0.455, 'd)', fontsize=8)
 
-        plt.tight_layout(pad=0.1, w_pad=2, h_pad=2)
+        # plt.tight_layout(pad=0.1, w_pad=2, h_pad=2)
         spin_property_fig.savefig('spin_properties/spin_properties.png', dpi=600, pad_inches=0.1, bbox_inches='tight')
 
 
