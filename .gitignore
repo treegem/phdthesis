@@ -172,3 +172,5 @@ venv.bak/
 .idea/modules.xml
 .idea/phdthesis.iml
 .idea/vcs.xml
+/images/chapter_7/fast_zs.txt
+/images/chapter_7/slow_zs.txt
