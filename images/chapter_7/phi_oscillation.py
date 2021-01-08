@@ -5,8 +5,8 @@ import numpy as np
 from scipy.io import loadmat
 from scipy.optimize import curve_fit
 
-from util.inches import cm_to_inch
 from util import tum_jet
+from util.inches import cm_to_inch
 
 
 def tum_color(index):
@@ -29,8 +29,7 @@ def main():
     phi_amplitude = fit_amplitude(p0=[0.04, 1 / 0.4, 0.9, 0], xdata=adjusted_slow_bins, ydata=slow_zs)
     rabi_name = 'pulsed.001.mat'
     rabi_path = slow_oscillation_path + '/..'
-    rabi_taus = loadmat(os.path.join(rabi_path, rabi_name))['taus'][0]
-    rabi_zs = loadmat(os.path.join(rabi_path, rabi_name))['zs'][0]
+    rabi_taus, rabi_zs = load_rabi_data(rabi_name, rabi_path)
     rabi_amplitude = fit_amplitude(p0=[0.2, 1 / 80., 0.85, 0], xdata=rabi_taus, ydata=rabi_zs)
     slow_zs = shift_and_normalize_zs(phi_amplitude, rabi_amplitude, zs=slow_zs)
     np.savetxt('slow_zs.txt', slow_zs)
@@ -38,8 +37,7 @@ def main():
     phi_amplitude = fit_amplitude(p0=[0.02, 10 / 0.2, 0.84, 0], xdata=adjusted_fast_bins, ydata=fast_zs)
     rabi_name = 'pulsed.009.mat'
     rabi_path = fast_oscillation_path + '/..'
-    rabi_taus = loadmat(os.path.join(rabi_path, rabi_name))['taus'][0]
-    rabi_zs = loadmat(os.path.join(rabi_path, rabi_name))['zs'][0]
+    rabi_taus, rabi_zs = load_rabi_data(rabi_name, rabi_path)
     rabi_amplitude = fit_amplitude(p0=[0.1, 1 / 120., 0.85, 0], xdata=rabi_taus, ydata=rabi_zs)
     fast_zs = shift_and_normalize_zs(phi_amplitude, rabi_amplitude, zs=fast_zs)
     np.savetxt('fast_zs.txt', fast_zs)
@@ -48,20 +46,17 @@ def main():
     fig, (ax1, ax2) = plt.subplots(2, 1)
     fig.set_figwidth(cm_to_inch(12))
     fig.set_figheight(cm_to_inch(10))
-    slow_start = None
-    slow_stop = None
+
     slow_color = tum_color(0)
-    ax1.plot(adjusted_slow_bins[slow_start:slow_stop] * 0.5, slow_zs[slow_start:slow_stop], color=slow_color,
+    ax1.plot(adjusted_slow_bins * 0.5, slow_zs, color=slow_color,
              label='3.5 mA')
     ax1.set_ylim(0.25, 0.7)
     ax1.set_ylabel(r'$\left\langle S_z \right\rangle$')
     ax1.set_xlabel(r'$\int I \cdot \mathrm{d}t$' + r' (3.5 mA$\cdot \mu$s)')
     ax1.legend(loc='lower right')
 
-    fast_start = None
-    fast_stop = None
     fast_color = tum_color(0)
-    ax2.plot(adjusted_fast_bins[fast_start:fast_stop] * 0.5, fast_zs[fast_start:fast_stop], color=fast_color,
+    ax2.plot(adjusted_fast_bins * 0.5, fast_zs, color=fast_color,
              label='60 mA')
     ax2.tick_params('y')
     ax2.set_ylim(0.28, 0.7)
@@ -70,6 +65,13 @@ def main():
     ax2.legend(loc='lower right')
     fig.tight_layout()
     plt.savefig(os.path.join(data_path, 'phase_oscillation.png'), dpi=500)
+
+
+def load_rabi_data(rabi_name, rabi_path):
+    full_data = loadmat(os.path.join(rabi_path, rabi_name))
+    rabi_taus = full_data['taus'][0]
+    rabi_zs = full_data['zs'][0]
+    return rabi_taus, rabi_zs
 
 
 def shift_and_normalize_zs(phi_amplitude, rabi_amplitude, zs):
