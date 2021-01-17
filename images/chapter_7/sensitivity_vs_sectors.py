@@ -14,7 +14,7 @@ def create_and_save_plot():
     plt.plot(ns_continuous, sensitivity(ns_continuous), '--',
              color=tum_jet.tum_color(0))
     plt.plot(ns_discrete, sensitivity(ns_discrete), 'o', color=tum_jet.tum_color(0))
-    plt.xlabel(r'$N_S$')
+    plt.xlabel(r'$N_\phi$')
     plt.ylabel(r'$\sigma_B / \sigma_{B,0}$')
     plt.tight_layout()
     plt.savefig('sensitivity_vs_sectors.png', dpi=500)
